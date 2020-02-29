@@ -27,6 +27,10 @@ public class Account implements Serializable{
 	@Column(name = "User_Role", length = 20, nullable = false)
 	private String userRole;
 
+	public Account() {
+
+	}
+	
 	public String getUserName() {
 		return userName;
 	}
