@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" 
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<!-- Bootstrap CSS -->
+	
+	<title>Product Directory</title>
+</head>
+
+<body>
+
+ <th:block th:include="/shop/_header"></th:block>
+ <th:block th:include="/shop/_menu"></th:block>
+
+<div>
+
+	<h3>Product Directory</h3>
+	<hr>
+	
+	
+
+	<table>
+		<thead>
+			<tr>
+				<th>Code</th>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Create Date</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			<tr th:each="tempProduct: ${products}">
+			
+				<td th:text="${tempProduct.code}" />
+				<td th:text="${tempProduct.name}" />
+				<td th:text="${tempProduct.price}" />
+				<td th:text="${tempProduct.createDate}" />
+		
+		</tbody>
+	</table>
+	
+	
+
+</div>
+
+</body>
+
+
+</html>

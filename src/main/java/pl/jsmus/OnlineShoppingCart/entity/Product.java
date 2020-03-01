@@ -1,6 +1,5 @@
 package pl.jsmus.OnlineShoppingCart.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,29 +11,37 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name = "Products")
-public class Product implements Serializable{
+@Table(name = "products")
+public class Product {
 
 	@Id
-	@Column(name = "Code", length = 20, nullable = false)
+	@Column(name = "code")
 	private String code;
 	
-	@Column(name = "Name", length = 225, nullable = false)
+	@Column(name = "name")
 	private String name;
 	
-	@Column(name = "Price", nullable = false)
+	@Column(name = "price")
 	private double price;
 	
 	@Lob
-	@Column(name = "Image", length = Integer.MAX_VALUE, nullable = true)
+	@Column(name = "image")
 	private byte[] image;
 	
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "Create_Date", nullable = false)
+	@Column(name = "create_Date")
 	private Date createDate;
 	
 	public Product() {
 		
+	}
+	
+	public Product(String code, String name, double price, byte[] image, Date createDate) {
+		this.code = code;
+		this.name = name;
+		this.price = price;
+		this.image = image;
+		this.createDate = createDate;
 	}
 
 	public String getCode() {
