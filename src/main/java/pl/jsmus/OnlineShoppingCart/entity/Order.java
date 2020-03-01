@@ -1,6 +1,5 @@
 package pl.jsmus.OnlineShoppingCart.entity;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,7 +11,7 @@ import javax.persistence.UniqueConstraint;
 @Entity
 @Table(name = "Orders",
 	   uniqueConstraints = {@UniqueConstraint(columnNames = "Order_Num")})
-public class Order implements Serializable{
+public class Order {
 
 	@Id
 	@Column(name = "ID", length = 50)

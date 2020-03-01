@@ -30,11 +30,11 @@ public class CartInfo {
 	public void setCustomerInfo(CustomerInfo customerInfo) {
 		this.customerInfo = customerInfo;
 	}
-
-	public List<CartLineInfo> getCartLine() {
+	
+	public List<CartLineInfo> getCartLines() {
 		return cartLines;
 	}
-	
+
 	private CartLineInfo findLineByCode(String code) {
 		for(CartLineInfo line : this.cartLines) {
 			if(line.getProductInfo().getCode().equals(code)) {
@@ -60,6 +60,39 @@ public class CartInfo {
 		}
 		else {
 			line.setQuantity(newQuantity);
+		}
+		
+	}
+
+	public void updateQuantity(CartInfo cartForm) {
+		if(cartForm != null) {
+			List<CartLineInfo> lines = cartForm.getCartLines();
+			for(CartLineInfo line : lines) {
+				this.updateProduct(line.getProductInfo().getCode(), line.getQuantity());
+			}
+		}
+		
+	}
+
+	public void updateProduct(String code, int quantity) {
+		CartLineInfo line = this.findLineByCode(code);
+		
+		if(line!=null) {
+			if(quantity <= 0) {
+				this.cartLines.remove(line);
+			}
+			else {
+				line.setQuantity(quantity);
+			}
+		}
+		
+	}
+
+	public void removeProduct(ProductInfo productInfo) {
+		CartLineInfo line = this.findLineByCode(productInfo.getCode());
+		
+		if(line != null) {
+			this.cartLines.remove(line);
 		}
 		
 	}

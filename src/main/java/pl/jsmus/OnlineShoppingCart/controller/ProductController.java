@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -52,17 +53,7 @@ public class ProductController {
 		return "/shop/order-list";
 	}
 	
-	@GetMapping("/cart")
-	public String listCart(HttpServletRequest request, Model theModel) {	
-		
-		CartInfo myCart = Utils.getCartInSession(request);
-		
-		theModel.addAttribute("cartForm", myCart);
-		
-		return "/shop/cart";
-	}
-	
-	@GetMapping("/buyProduct")
+	@RequestMapping("/buyProduct")
 	public String buyProduct(HttpServletRequest request,
 			@RequestParam("productCode") String theCode, Model theModel) {
 		
@@ -77,6 +68,48 @@ public class ProductController {
 			ProductInfo productInfo = new ProductInfo(theProduct);
 			
 			cartInfo.addProduct(productInfo, 1);
+		}
+		
+		return "redirect:/shop/cart";
+	}
+	
+	//POST: Update quantity for product in cart
+	@PostMapping("/cart")
+	public String shoppingCartUpdate(HttpServletRequest request, Model theModel,
+			@ModelAttribute("cartForm") CartInfo cartForm) {	
+		
+		CartInfo cartInfo = Utils.getCartInSession(request);
+		cartInfo.updateQuantity(cartForm);
+		
+		return "redirect:/shop/cart";
+	}
+	
+	//GET: Show cart
+	@GetMapping("/cart")
+	public String listCart(HttpServletRequest request, Model theModel) {	
+		
+		CartInfo myCart = Utils.getCartInSession(request);
+		
+		theModel.addAttribute("cartForm", myCart);
+		
+		return "/shop/cart";
+	}
+	
+	//DELETE: Delete product from cart
+	@RequestMapping("/cartRemoveProduct")
+	public String removeProduct(HttpServletRequest request, Model theModel,
+			@RequestParam(value = "code")String code) {
+		
+		Product product = null;
+		
+		if(code != null && code.length() > 0) {
+			product = productService.findById(code);
+		}
+		
+		if(product != null) {
+			CartInfo cartInfo = Utils.getCartInSession(request);
+			ProductInfo productInfo = new ProductInfo(product);
+			cartInfo.removeProduct(productInfo);
 		}
 		
 		return "redirect:/shop/cart";
