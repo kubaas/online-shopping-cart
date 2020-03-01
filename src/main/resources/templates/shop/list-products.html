@@ -24,28 +24,67 @@
 	<hr>
 	
 	
-
-	<table>
-		<thead>
-			<tr>
-				<th>Code</th>
-				<th>Name</th>
-				<th>Price</th>
-				<th>Create Date</th>
-			</tr>
-		</thead>
-		
-		<tbody>
-			<tr th:each="tempProduct: ${products}">
+	<div sec:authorize="hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')">	
+		<table>
+			<thead>
+				<tr>
+					<th>Code</th>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Create Date</th>
+					<th>Action</th>
+				</tr>
+			</thead>
 			
-				<td th:text="${tempProduct.code}" />
-				<td th:text="${tempProduct.name}" />
-				<td th:text="${tempProduct.price}" />
-				<td th:text="${tempProduct.createDate}" />
-		
-		</tbody>
-	</table>
+			<tbody>
+				<tr th:each="tempProduct: ${products}">
+				
+					<td th:text="${tempProduct.code}" />
+					<td th:text="${tempProduct.name}" />
+					<td th:text="${tempProduct.price}" />
+					<td th:text="${tempProduct.createDate}" />
+					<td>				
+						<div>
+							<!-- Add "Buy" button/link -->
+							<a th:href="@{/shop/buyProduct(productCode=${tempProduct.code})}">
+								Buy
+							</a>
+						</div>		
+					</td>
+			
+			</tbody>
+		</table>
+	</div>
 	
+	<div sec:authorize="!hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')">
+		<table>
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Price</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<tr th:each="tempProduct: ${products}">
+				
+					<td th:text="${tempProduct.name}" />
+					<td th:text="${tempProduct.price}" />
+					<td>				
+						<div>
+							<!-- Add "Buy" button/link -->
+							<a th:href="@{/shop/buyProduct(productCode=${tempProduct.code})}">
+								Buy
+							</a>
+						</div>		
+					</td>
+			
+			</tbody>
+		</table>
+	
+	</div>
+		
 	
 
 </div>

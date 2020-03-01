@@ -2,7 +2,7 @@
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 	
-	<a th:href="@{/shop}">Home</a>
+	<a th:href="@{/}">Home</a>
 	|
 	<a th:href="@{/shop/list}">Product List</a>
 	|
@@ -15,7 +15,7 @@
 		|
 	</th:block>
 	<th:block sec:authorize="hasRole('ROLE_ADMIN')">
-		<a th:href="@{/shop/product/}">
+		<a th:href="@{/shop/createProduct/}">
 		Create Product
 		</a>
 		|
