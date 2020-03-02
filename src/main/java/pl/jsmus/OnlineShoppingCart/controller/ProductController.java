@@ -1,5 +1,6 @@
 package pl.jsmus.OnlineShoppingCart.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import pl.jsmus.OnlineShoppingCart.entity.Order;
 import pl.jsmus.OnlineShoppingCart.entity.Product;
 import pl.jsmus.OnlineShoppingCart.model.CartInfo;
 import pl.jsmus.OnlineShoppingCart.model.ProductInfo;
+import pl.jsmus.OnlineShoppingCart.service.OrderService;
 import pl.jsmus.OnlineShoppingCart.service.ProductService;
 import pl.jsmus.OnlineShoppingCart.utils.Utils;
 
@@ -25,13 +28,23 @@ public class ProductController {
 
 	private ProductService productService;
 	
+	private OrderService orderService;
+	
 	@Autowired
-	public ProductController(ProductService theProductService) {
+	public ProductController(ProductService theProductService, OrderService theOrderService) {
 		productService = theProductService;
+		orderService = theOrderService;
 	}
 	
-	// add mapping for "/list"
+	//add mapping for home page
+	@GetMapping("/")
+	public String listHomePage() {
+		
+		return "/shop/home";
+	}
 	
+	
+	// add mapping for "/list"
 	@GetMapping("/list")
 	public String listProducts(Model theModel) {
 		
@@ -43,13 +56,16 @@ public class ProductController {
 		return "/shop/list-products";
 	}
 	
-	@GetMapping("/createProduct")
-	public String createProduct() {	
-		return "/shop/create-product";
-	}
 	
 	@GetMapping("/orderList")
-	public String listOrders() {	
+	public String listOrders(Model theModel) {
+		
+		List<Order> orders = new ArrayList<Order>();
+		
+		orders = orderService.findAll();
+		
+		theModel.addAttribute("orders", orders);
+		
 		return "/shop/order-list";
 	}
 	

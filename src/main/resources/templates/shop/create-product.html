@@ -17,7 +17,40 @@
 	<th:block th:include="/shop/_header"></th:block>
 	<th:block th:include="/shop/_menu"></th:block>
 	
-	<h3>Create Product Directory</h3>
+	<div>Create Product</div>
+	
+	<form th:object="${productForm}" th:action="@{/shop/createProduct}" method="POST">
+		<table>
+			<tr>
+				<td>Code *</td>
+				<td>
+					<input th:field="*{code}" type="text" />
+				</td>
+			
+			</tr>
+			<tr>
+				<td>Name *</td>
+				<td>
+					<input th:field="*{name}" type="text" />
+				</td>
+			</tr>
+			<tr>
+				<td>Price *</td>
+				<td>
+					<input th:field="*{price}" type="text" />
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+					<input type="submit" value="Submit" />
+					<input type="reset" value="Reset" />
+				</td>
+			</tr>
+		
+		</table>
+	
+	</form>
 
 
 </body>

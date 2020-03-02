@@ -111,6 +111,7 @@ public class CustomerController {
 			
 			order.setId(id);
 			order.setOrderNum(1);
+			cartInfo.setOrderNum(1);
 			order.setAmount(1);
 			order.setCustomerAddress(cartInfo.getCustomerInfo().getAddress());
 			order.setCustomerEmail(cartInfo.getCustomerInfo().getEmail());
@@ -120,7 +121,7 @@ public class CustomerController {
 			orderService.save(order);
 			
 			OrderDetail orderDetail = new OrderDetail();
-			orderDetail.setId("1");
+			orderDetail.setId(UUID.randomUUID().toString());
 			orderDetail.setAmount(1);
 			for(CartLineInfo line : cartInfo.getCartLines()) {
 				orderDetail.setPrice(line.getAmount());
@@ -148,5 +149,17 @@ public class CustomerController {
 		Utils.storeLastOrderedCartInSession(request, cartInfo);
 		
 		return "redirect:/shop/cartFinalize";
+	}
+	
+	@GetMapping("/cartFinalize")
+	public String shoppingCartFinalize(HttpServletRequest request, Model theModel) {
+		
+		CartInfo lastOrderedCart = Utils.getLastOrderedCartInSession(request);
+		
+		if(lastOrderedCart == null) {
+			return "redirect:/shop/cart";
+		}
+		theModel.addAttribute("lastOrderedCart", lastOrderedCart);
+		return "shop/cart-finalize";
 	}
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" 
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<!-- Bootstrap CSS -->
+	
+	<title>Shopping Cart Finalize Directory</title>
+</head>
+
+<body>
+	<th:block th:include="/shop/_header"></th:block>
+	<th:block th:include="/shop/_menu"></th:block>
+	
+	<div>Finalize</div>
+	<div>
+		<h3>Thank you for order</h3>
+		Your order number is: <span th:utext="${lastOrderedCart.orderNum}"></span>
+	</div>
+
+</body>
+</html>

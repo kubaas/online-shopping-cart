@@ -21,12 +21,16 @@ public class Utils {
 	}
 
 	public static void removeCartInSession(HttpServletRequest request) {
-		// TODO Auto-generated method stub
+		request.getSession().removeAttribute("myCart");
 		
 	}
 
 	public static void storeLastOrderedCartInSession(HttpServletRequest request, CartInfo cartInfo) {
-		// TODO Auto-generated method stub
+		request.getSession().setAttribute("lastOrderedCart", cartInfo);
 		
+	}
+
+	public static CartInfo getLastOrderedCartInSession(HttpServletRequest request) {
+		return (CartInfo) request.getSession().getAttribute("lastOrderedCart");
 	}
 }
