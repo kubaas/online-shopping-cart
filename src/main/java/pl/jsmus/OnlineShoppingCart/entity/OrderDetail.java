@@ -10,30 +10,30 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Order_Details")
+@Table(name = "order_details")
 public class OrderDetail {
 
 	@Id
-	@Column(name = "ID", length = 50, nullable = false)
+	@Column(name = "id", length = 50, nullable = false)
 	private String id;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ORDER_ID", nullable = false,
+	@JoinColumn(name = "order_id", nullable = false,
 				foreignKey = @ForeignKey(name = "ORDER_DETAIL_ORD_FK"))
 	private Order order;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "PRODUCT_ID", nullable = false,
+	@JoinColumn(name = "product_id", nullable = false,
 				foreignKey = @ForeignKey(name = "ORDER_DETAIL_PROD_FK"))
 	private Product product;
 	
-	@Column(name = "Quanity", nullable = false)
+	@Column(name = "quanity", nullable = false)
 	private int quanity;
 	
-	@Column(name = "Price", nullable = false)
+	@Column(name = "price", nullable = false)
 	private double price;
 	
-	@Column(name = "Amount", nullable = false)
+	@Column(name = "amount", nullable = false)
 	private double amount;
 
 	public String getId() {

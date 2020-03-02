@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" 
+		xmlns:th="http://www.thymeleaf.org"
+		xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<!-- Bootstrap CSS -->
+	
+	<title>Shopping Cart Confirmation Directory</title>
+</head>
+
+<body>
+	<th:block th:include="/shop/_header"></th:block>
+	<th:block th:include="/shop/_menu"></th:block>
+	<h3>Shopping Cart Confirmation Directory</h3>
+	
+	<div>
+		<h3>Customer Information:</h3>
+		<ul>
+			<li>Name: <span th:utext="${myCart.customerInfo.name}"></span></li>
+			<li>Email: <span th:utext="${myCart.customerInfo.email}"></span></li>
+			<li>Phone: <span th:utext="${myCart.customerInfo.phone}"></span></li>
+			<li>Address: <span th:utext="${myCart.customerInfo.address}"></span></li>
+		</ul>
+		<h3>Cart Information:</h3>
+		<ul>
+			<li>Total Quantity: <span th:utext="${myCart.quantityTotal}"></span></li>
+			<li>Total Amount: <span th:utext="${#numbers.formatDecimal(myCart.amountTotal,2,2,'COMMA')}">
+			</span></li>
+		</ul>
+	</div>
+	
+	<form method="POST" th:action="@{/shop/cartConfirmation}">
+		<!-- For editing cart -->
+		<a th:href="@{/shop/cart}">
+			Edit Cart
+		</a>
+		<!-- For editing customer -->
+		<a th:href="@{/shop/cartCustomer}">
+			Edit Customer Information
+		</a>
+		<!-- Send/Save -->
+		<input type="submit" value="Send" />
+	</form>
+	<div th:each="cartLineInfo : ${myCart.cartLines}">
+		<ul>
+			<li>
+				Code: <span th:utext="${cartLineInfo.productInfo.code}"></span>
+				<input type="hidden" name="code" th:value="${cartLineInfo.productInfo.code}" />
+			</li>
+			<li>Name: <span th:utext="${cartLineInfo.productInfo.name}"></span></li>
+			<li>Price: <span th:utext="${#numbers.formatDecimal(cartLineInfo.productInfo.price,2,2,'COMMA')}">
+			</span></li>
+			<li>Quantity: <span th:utext="${cartLineInfo.quantity}"></span></li>
+			<li>Subtotal: <span th:utext="${#numbers.formatDecimal(cartLineInfo.amount,2,2,'COMMA')}">
+			</span></li>
+		</ul>
+	</div>
+
+</body>
+
+</html>

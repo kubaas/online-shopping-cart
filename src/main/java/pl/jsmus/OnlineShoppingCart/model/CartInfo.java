@@ -96,5 +96,27 @@ public class CartInfo {
 		}
 		
 	}
+
+	public boolean isValidCustomer() {
+		return this.customerInfo != null && this.customerInfo.isValid();
+	}
+	
+	public int getQuantityTotal() {
+		int quantity = 0;
+		for (CartLineInfo line : this.cartLines) {
+			quantity += line.getQuantity();
+		}
+		return quantity;
+	}
+	
+	public double getAmountTotal() {
+		double amount = 0;
+		for (CartLineInfo line : this.cartLines) {
+			amount += line.getAmount();
+		}
+		return amount;
+	}
+	
+	
 	
 }

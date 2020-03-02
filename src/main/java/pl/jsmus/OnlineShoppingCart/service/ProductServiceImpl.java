@@ -12,7 +12,7 @@ import pl.jsmus.OnlineShoppingCart.entity.Product;
 @Service
 public class ProductServiceImpl implements ProductService {
 
-	ProductRepository productRepository;
+	private ProductRepository productRepository;
 	
 	@Autowired
 	public ProductServiceImpl(ProductRepository theProductRepository) {

@@ -19,4 +19,14 @@ public class Utils {
 		
 		return cartInfo;
 	}
+
+	public static void removeCartInSession(HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void storeLastOrderedCartInSession(HttpServletRequest request, CartInfo cartInfo) {
+		// TODO Auto-generated method stub
+		
+	}
 }
