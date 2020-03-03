@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import pl.jsmus.OnlineShoppingCart.entity.Order;
+import pl.jsmus.OnlineShoppingCart.entity.OrderDetail;
 import pl.jsmus.OnlineShoppingCart.entity.Product;
 import pl.jsmus.OnlineShoppingCart.model.CartInfo;
 import pl.jsmus.OnlineShoppingCart.model.ProductInfo;
+import pl.jsmus.OnlineShoppingCart.service.OrderDetailService;
 import pl.jsmus.OnlineShoppingCart.service.OrderService;
 import pl.jsmus.OnlineShoppingCart.service.ProductService;
 import pl.jsmus.OnlineShoppingCart.utils.Utils;
@@ -30,10 +32,13 @@ public class ProductController {
 	
 	private OrderService orderService;
 	
+	private OrderDetailService orderDetailService;
+	
 	@Autowired
-	public ProductController(ProductService theProductService, OrderService theOrderService) {
+	public ProductController(ProductService theProductService, OrderService theOrderService, OrderDetailService theDetailService) {
 		productService = theProductService;
 		orderService = theOrderService;
+		orderDetailService = theDetailService;
 	}
 	
 	//add mapping for home page
@@ -68,6 +73,37 @@ public class ProductController {
 		
 		return "/shop/order-list";
 	}
+	
+	@GetMapping("/order")
+	public String orderDetailsView(Model theModel, @RequestParam("orderId") String orderId) {
+		Order order = null;
+		
+		if (orderId == null) {
+			return "redirect:/shop/orderList";
+		}
+
+		order = orderService.findById(orderId);
+		
+		List<OrderDetail> orderDetails = orderDetailService.findAll();
+		List<OrderDetail> orderDetails2 = new ArrayList<OrderDetail>();
+		
+		for(OrderDetail line : orderDetails) {
+			System.out.println("LINE GETID: "+ line.getOrder().getId());
+			System.out.println("ORDERID: " + orderId);
+			if(line.getOrder().getId() == orderId) {
+				
+				orderDetails2.add(line);
+			}
+		}
+		
+		System.out.println(orderDetails2);
+		
+		theModel.addAttribute("orderInfo", order);
+		theModel.addAttribute("details", orderDetails2);
+		
+		return "/shop/order";
+	}
+	
 	
 	@RequestMapping("/buyProduct")
 	public String buyProduct(HttpServletRequest request,
