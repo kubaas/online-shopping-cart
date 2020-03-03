@@ -1,6 +1,8 @@
 package pl.jsmus.OnlineShoppingCart.utils;
 
+import javax.persistence.criteria.Order;
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.Session;
 
 import pl.jsmus.OnlineShoppingCart.model.CartInfo;
 
@@ -33,4 +35,5 @@ public class Utils {
 	public static CartInfo getLastOrderedCartInSession(HttpServletRequest request) {
 		return (CartInfo) request.getSession().getAttribute("lastOrderedCart");
 	}
+	
 }

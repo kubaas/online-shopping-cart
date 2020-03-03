@@ -1,6 +1,7 @@
 package pl.jsmus.OnlineShoppingCart.controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,6 +52,11 @@ public class CustomerController {
 		
 		CustomerInfo customerInfo = new CustomerInfo();
 		
+		if (cartInfo.getCustomerInfo() != null) {
+			
+			customerInfo = cartInfo.getCustomerInfo();
+		}
+	
 		
 		theModel.addAttribute("customerInfo", customerInfo);
 		
@@ -109,10 +115,19 @@ public class CustomerController {
 			
 			String id = UUID.randomUUID().toString();
 			
+			List<Order> orders_tmp = orderService.findAll();
+			int max = 0;
+			
+			for(Order i : orders_tmp) {
+				if(i.getOrderNum() > max) {
+					max = i.getOrderNum();
+				}
+			}
+			
 			order.setId(id);
-			order.setOrderNum(1);
-			cartInfo.setOrderNum(1);
-			order.setAmount(1);
+			order.setOrderNum(max + 1);
+			cartInfo.setOrderNum(max + 1);
+			order.setAmount(cartInfo.getAmountTotal());
 			order.setCustomerAddress(cartInfo.getCustomerInfo().getAddress());
 			order.setCustomerEmail(cartInfo.getCustomerInfo().getEmail());
 			order.setCustomerName(cartInfo.getCustomerInfo().getName());
@@ -120,11 +135,13 @@ public class CustomerController {
 			order.setOrderDate(new Date());
 			orderService.save(order);
 			
-			OrderDetail orderDetail = new OrderDetail();
-			orderDetail.setId(UUID.randomUUID().toString());
-			orderDetail.setAmount(1);
+			
+			
 			for(CartLineInfo line : cartInfo.getCartLines()) {
-				orderDetail.setPrice(line.getAmount());
+				OrderDetail orderDetail = new OrderDetail();
+				orderDetail.setId(UUID.randomUUID().toString());
+				orderDetail.setAmount(line.getAmount());
+				orderDetail.setPrice(line.getProductInfo().getPrice());
 				orderDetail.setQuanity(line.getQuantity());
 				Product product = new Product();
 				product.setCode(line.getProductInfo().getCode());
@@ -134,6 +151,7 @@ public class CustomerController {
 				orderDetail.setProduct(product);
 				orderDetail.setOrder(order);
 				orderDetailService.save(orderDetail);
+				
 				
 			}
 			
