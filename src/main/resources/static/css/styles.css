@@ -1,0 +1,30 @@
+h3 {
+	margin: 0px;
+	padding: 0px;
+}
+body {
+	max-width: 860px;
+	min-width: 360px;
+	margin: 0px auto;
+	background: #F8F8F8;
+	padding: 0px 5px;
+	text-align: center;
+}
+
+.page-title {
+	font-size: 120%;
+	text-align: left;
+	margin: 10px 0px;
+}
+
+.demo-container, .login-container, .account-container {
+    padding: 5px;
+    text-align:left;
+    margin:20px 0px;
+}
+
+.site-name{
+	font-size: 200%;
+	margin: 10px 10px 10px 0px;
+	padding: 5px;
+}
