@@ -3,6 +3,9 @@ Online shopping cart application with use of Hibernate, Spring, Thymeleaf and Ja
 
 Available logging for the three accounts with logins: user, manager, admin. Password is test123. User can only buy products, manager can additionally review orders and admin has got all the privileges.
 
-![Alt text](img/1.png?raw=true "Title")
-![Alt text](img/2.png?raw=true "Title")
-![Alt text](img/3.png?raw=true "Title")
+![Alt text](img/1.png?raw=true)
+This is the view for the menu.
+![Alt text](img/2.png?raw=true)
+This is the view for creating the new product as the admin.
+![Alt text](img/3.png?raw=true)
+This is the view for the cart.
