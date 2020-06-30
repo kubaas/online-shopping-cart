@@ -20,40 +20,32 @@
 	<th:block th:include="/shop/_header"></th:block>
 	<th:block th:include="/shop/_menu"></th:block>
 	
-	<div>Create Product</div>
+	<h3 class="menu-directory">Create Product</h3>
+
+	<hr>
 	
-	<form th:object="${productForm}" th:action="@{/shop/createProduct}" method="POST">
-		<table>
-			<tr>
-				<td>Code *</td>
-				<td>
-					<input th:field="*{code}" type="text" />
-				</td>
-			
-			</tr>
-			<tr>
-				<td>Name *</td>
-				<td>
-					<input th:field="*{name}" type="text" />
-				</td>
-			</tr>
-			<tr>
-				<td>Price *</td>
-				<td>
-					<input th:field="*{price}" type="text" />
-				</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td>
-					<input type="submit" value="Submit" />
-					<input type="reset" value="Reset" />
-				</td>
-			</tr>
-		
-		</table>
-	
+	<form th:object="${productForm}" th:action="@{/shop/createProduct}" method="POST" class="form-directory">
+		<div class="form-group">
+			<label for="code">Code *</label>
+			<input th:field="*{code}" class="form-control" type="text" id="code"/>
+		</div>
+
+		<div class="form-group">
+			<label for="name">Name *</label>
+			<input th:field="*{name}" class="form-control" type="text" id="name"/>
+		</div>
+
+		<div class="form-group">
+			<label for="price">Price *</label>
+			<input th:field="*{price}" class="form-control" type="text" id="price"/>
+		</div>
+
+		<input type="submit" class="btn btn-success" value="Submit"/>
+		<input type="reset" class="btn btn-danger" value="Reset" style="float: right;" />
+
+
 	</form>
+
 
 
 </body>

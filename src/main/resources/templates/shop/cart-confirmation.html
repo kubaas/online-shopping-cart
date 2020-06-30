@@ -18,50 +18,57 @@
 <body>
 	<th:block th:include="/shop/_header"></th:block>
 	<th:block th:include="/shop/_menu"></th:block>
-	<h3>Shopping Cart Confirmation Directory</h3>
-	
-	<div>
-		<h3>Customer Information:</h3>
-		<ul>
-			<li>Name: <span th:utext="${myCart.customerInfo.name}"></span></li>
-			<li>Email: <span th:utext="${myCart.customerInfo.email}"></span></li>
-			<li>Phone: <span th:utext="${myCart.customerInfo.phone}"></span></li>
-			<li>Address: <span th:utext="${myCart.customerInfo.address}"></span></li>
+	<h3 class="menu-directory">Shopping Cart Confirmation</h3>
+	<hr>
+
+
+	<h3 class="title-directory">Customer Information:</h3>
+	<div class="table-directory">
+		<ul class="list-group">
+			<li class="list-group-item">Name: <span th:utext="${myCart.customerInfo.name}"></span></li>
+			<li class="list-group-item">Email: <span th:utext="${myCart.customerInfo.email}"></span></li>
+			<li class="list-group-item">Phone: <span th:utext="${myCart.customerInfo.phone}"></span></li>
+			<li class="list-group-item">Address: <span th:utext="${myCart.customerInfo.address}"></span></li>
 		</ul>
-		<h3>Cart Information:</h3>
-		<ul>
-			<li>Total Quantity: <span th:utext="${myCart.quantityTotal}"></span></li>
-			<li>Total Amount: <span th:utext="${#numbers.formatDecimal(myCart.amountTotal,2,2,'COMMA')}">
+	</div>
+
+	<h3 class="title-directory">Cart Information:</h3>
+	<div class="table-directory">
+		<ul class="list-group">
+			<li class="list-group-item">Total Quantity: <span th:utext="${myCart.quantityTotal}"></span></li>
+			<li class="list-group-item">Total Amount: <span th:utext="${#numbers.formatDecimal(myCart.amountTotal,2,2,'COMMA') + ' $'}">
 			</span></li>
 		</ul>
 	</div>
-	
-	<form method="POST" th:action="@{/shop/cartConfirmation}">
+
+	<div style="clear: both;"></div>
+
+	<form method="POST" th:action="@{/shop/cartConfirmation}" style="margin-top: 15px; margin-bottom: 30px; margin-left: 30px;">
 		<!-- For editing cart -->
-		<a th:href="@{/shop/cart}">
+		<a th:href="@{/shop/cart}" class="btn btn-primary button-directory">
 			Edit Cart
 		</a>
 		<!-- For editing customer -->
-		<a th:href="@{/shop/cartCustomer}">
+		<a th:href="@{/shop/cartCustomer}" class="btn btn-primary button-directory">
 			Edit Customer Information
 		</a>
 		<!-- Send/Save -->
-		<input type="submit" value="Send" />
+		<input type="submit" value="Send" class="btn btn-success button-directory"/>
 	</form>
-	<div th:each="cartLineInfo : ${myCart.cartLines}">
-		<ul>
-			<li>
-				Code: <span th:utext="${cartLineInfo.productInfo.code}"></span>
-				<input type="hidden" name="code" th:value="${cartLineInfo.productInfo.code}" />
-			</li>
-			<li>Name: <span th:utext="${cartLineInfo.productInfo.name}"></span></li>
-			<li>Price: <span th:utext="${#numbers.formatDecimal(cartLineInfo.productInfo.price,2,2,'COMMA')}">
-			</span></li>
-			<li>Quantity: <span th:utext="${cartLineInfo.quantity}"></span></li>
-			<li>Subtotal: <span th:utext="${#numbers.formatDecimal(cartLineInfo.amount,2,2,'COMMA')}">
-			</span></li>
-		</ul>
+
+	<div class="table-directory">
+		<div th:each="cartLineInfo : ${myCart.cartLines}" style="margin-bottom: 15px; width: 250px; display: inline-block;" class="button-directory">
+			<ul class="list-group">
+				<li class="list-group-item">Name: <span th:utext="${cartLineInfo.productInfo.name}"></span></li>
+				<li class="list-group-item">Price: <span th:utext="${#numbers.formatDecimal(cartLineInfo.productInfo.price,2,2,'COMMA') + ' $'}">
+				</span></li>
+				<li class="list-group-item">Quantity: <span th:utext="${cartLineInfo.quantity}"></span></li>
+				<li class="list-group-item">Subtotal: <span th:utext="${#numbers.formatDecimal(cartLineInfo.amount,2,2,'COMMA') + ' $'}">
+				</span></li>
+			</ul>
+		</div>
 	</div>
+	<th:block th:include="/shop/_footer"></th:block>
 
 </body>
 

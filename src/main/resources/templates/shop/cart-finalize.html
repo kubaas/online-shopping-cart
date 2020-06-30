@@ -20,11 +20,14 @@
 	<th:block th:include="/shop/_header"></th:block>
 	<th:block th:include="/shop/_menu"></th:block>
 	
-	<div>Finalize</div>
-	<div>
-		<h3>Thank you for order</h3>
-		Your order number is: <span th:utext="${lastOrderedCart.orderNum}"></span>
+	<h3 class="menu-directory">Finalize</h3>
+	<hr>
+	<h3 class="menu-directory">Thank you for order</h3>
+	<div class="menu-directory">
+		<h4>Your order number is: <span th:utext="${lastOrderedCart.orderNum}"></span> </h4>
 	</div>
+
+
 
 </body>
 </html>

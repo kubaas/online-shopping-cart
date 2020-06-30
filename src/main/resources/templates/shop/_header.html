@@ -1,27 +1,29 @@
 <div
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+	style="margin-bottom: 15px;">
 	
-	<div class="site-name">Online Shop</div>
+	<div class="site-name">Shopping Cart Pizza Demo</div>
 
-	<div>
+
+	<div style="float: right; display: inline-flex">
 		<th:block sec:authorize="isAuthenticated()">
 			Hello
-			<a th:href="@{/shop/accountInfo}" th:utext="${#request.userPrincipal.name}">..</a>
-			&nbsp;|&nbsp;
+			<a th:href="@{/shop/accountInfo}" th:utext="${#request.userPrincipal.name}" style="margin-left: 3px;">..</a>
 			<!-- Add a logout button -->
 			<form action="#" th:action="@{/logout}" method="POST">
-			
-				<input type="submit" value="Logout" />
-				
+
+				<input type="submit" value="Logout" class="btn btn-primary btn-sm button-directory" style="margin-left: 15px;"/>
+
 			</form>
 		</th:block>
-		
+
 		<th:block sec:authorize="!isAuthenticated()">
 			<a th:href="@{/showMyLoginPage}">Login</a>
 		</th:block>
-	
 	</div>
+
+	<div style="clear: both;"></div>
 
 
 </div>

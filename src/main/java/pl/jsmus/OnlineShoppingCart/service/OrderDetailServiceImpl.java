@@ -8,6 +8,13 @@ import org.springframework.stereotype.Service;
 import pl.jsmus.OnlineShoppingCart.dao.OrderDetailsRepository;
 import pl.jsmus.OnlineShoppingCart.entity.OrderDetail;
 
+/**
+ * 
+ * @author jakub
+ *
+ *	Service for connecting with orderDetailRepository(DAO) and using CRUD methods
+ */
+
 @Service
 public class OrderDetailServiceImpl implements OrderDetailService {
 

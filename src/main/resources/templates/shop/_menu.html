@@ -1,24 +1,22 @@
-<div
+
+<div class="topnav"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-	
-	<a th:href="@{/}">Home</a>
-	|
-	<a th:href="@{/shop/list}">Product List</a>
-	|
-	<a th:href="@{/shop/cart}">My Cart</a>
-	|
-	<th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')">
-		<a th:href="@{/shop/orderList}">
-		Order List
-		</a>
-		|
-	</th:block>
-	<th:block sec:authorize="hasRole('ROLE_ADMIN')">
-		<a th:href="@{/shop/createProduct/}">
-		Create Product
-		</a>
-		|
-	</th:block>
+<!-- -->
+		<a th:href="@{/}" class="active">Home</a>
+		<a th:href="@{/shop/list}">Product List</a>
+		<a th:href="@{/shop/cart}">My Cart</a>
+		<th:block sec:authorize="hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')">
+			<a th:href="@{/shop/orderList}">
+				Order List
+			</a>
+		</th:block>
+		<th:block sec:authorize="hasRole('ROLE_ADMIN')">
+			<a th:href="@{/shop/createProduct/}">
+				Create Product
+			</a>
+		</th:block>
 
+
+	<!-- -->
 </div>

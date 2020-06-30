@@ -23,12 +23,11 @@
 
 <div>
 
-	<h3>Product Directory</h3>
-	<hr>
+	<h3 class="menu-directory">Product Directory</h3>
 	
 	
-	<div sec:authorize="hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')">	
-		<table>
+	<div sec:authorize="hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')" class="table-directory">
+		<table class="table" style="width: 100%;">
 			<thead>
 				<tr>
 					<th>Code</th>
@@ -44,23 +43,25 @@
 				
 					<td th:text="${tempProduct.code}" />
 					<td th:text="${tempProduct.name}" />
-					<td th:text="${tempProduct.price}" />
+					<td th:text="${#numbers.formatDecimal(tempProduct.price, 0, 'COMMA', 2, 'POINT') + ' $'}" />
 					<td th:text="${tempProduct.createDate}" />
-					<td>				
-						<div>
+					<td>
 							<!-- Add "Buy" button/link -->
-							<a th:href="@{/shop/buyProduct(productCode=${tempProduct.code})}">
+							<a th:href="@{/shop/buyProduct(productCode=${tempProduct.code})}" class="btn btn-success">
 								Buy
 							</a>
-						</div>		
+							<th:block sec:authorize="hasRole('ROLE_ADMIN')">
+								<a th:href="@{/shop/buyProduct(productCode=${tempProduct.code})}"
+								   class="btn btn-danger">Delete</a>
+							</th:block>
 					</td>
 			
 			</tbody>
 		</table>
 	</div>
 	
-	<div sec:authorize="!hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')">
-		<table>
+	<div sec:authorize="!hasAnyRole('ROLE_MANAGER', 'ROLE_ADMIN')" class="table-directory">
+		<table class="table" style="width: 100%;">
 			<thead>
 				<tr>
 					<th>Name</th>
@@ -73,14 +74,12 @@
 				<tr th:each="tempProduct: ${products}">
 				
 					<td th:text="${tempProduct.name}" />
-					<td th:text="${tempProduct.price}" />
-					<td>				
-						<div>
+					<td th:text="${#numbers.formatDecimal(tempProduct.price, 0, 'COMMA', 2, 'POINT') + ' $'}" />
+					<td>
 							<!-- Add "Buy" button/link -->
-							<a th:href="@{/shop/buyProduct(productCode=${tempProduct.code})}">
+							<a th:href="@{/shop/buyProduct(productCode=${tempProduct.code})}" class="btn btn-success">
 								Buy
 							</a>
-						</div>		
 					</td>
 			
 			</tbody>

@@ -20,45 +20,38 @@
 	<th:block th:include="/shop/_header"></th:block>
 	<th:block th:include="/shop/_menu"></th:block>
 
-	<div>Enter Customer Information</div>
-	
-	<form method="POST" th:object="${customerInfo}" th:action="@{/shop/saveCustomer}">
-	
-		<table>
-			<tr>
-				<td>Name *</td>
-				<td><input type="text" th:field="*{name}" /></td>
-				<td>
-					<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">..</span>
-				</td>
-			</tr>
-			<tr>
-				<td>Email *</td>
-				<td><input type="text" th:field="*{email}" /></td>
-				<td>
-					<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span>
-				</td>
-			</tr>
-			<tr>
-				<td>Phone *</td>
-				<td><input type="text" th:field="*{phone}" /></td>
-				<td>
-					<span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">..</span>
-				</td>
-			</tr>
-			<tr>
-				<td>Address *</td>
-				<td><input type="text" th:field="*{address}" /></td>
-				<td>
-					<span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">..</span>
-				</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td><input type="submit" value="Submit" /> <input type="reset" value="Reset" />
-				</td>
+	<h3 class="menu-directory">Enter Customer Information</h3>
 
-		</table>
+	<hr>
+	
+	<form method="POST" th:object="${customerInfo}" th:action="@{/shop/saveCustomer}" class="form-directory">
+		<div class="form-group">
+			<label for="name">Name *</label>
+			<input type="text" id="name" class="form-control" th:field="*{name}"/>
+			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">..</span>
+		</div>
+
+		<div class="form-group">
+			<label for="email">Email *</label>
+			<input type="text" id="email" class="form-control" th:field="*{email}" />
+			<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">..</span>
+		</div>
+
+		<div class="form-group">
+			<label for="phone">Phone *</label>
+			<input type="text" id="phone" class="form-control" th:field="*{phone}" />
+			<span th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">..</span>
+		</div>
+
+		<div class="form-group">
+			<label for="address">Address *</label>
+			<input type="text" id="address" class="form-control" th:field="*{address}" />
+			<span th:if="${#fields.hasErrors('address')}" th:errors="*{address}">..</span>
+		</div>
+
+		<input type="submit" value="Submit" class="btn btn-success"/>
+		<input type="reset" value="Reset" class="btn btn-danger" style="float: right;"/>
+
 	
 	</form>
 

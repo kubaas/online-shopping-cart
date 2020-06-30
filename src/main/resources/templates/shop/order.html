@@ -20,41 +20,51 @@
 	<th:block th:include="/shop/_header"></th:block>
 	<th:block th:include="/shop/_menu"></th:block>
 	
-	<div >Order info</div>
-
+	<h3 class="menu-directory">Order info</h3>
+	<hr>
 	<div>
-		<h3>Customer Information:</h3>
-		<ul>
-			<li>Name: <span th:utext="${orderInfo.customerName}"></span></li>
-			<li>Email: <span th:utext="${orderInfo.customerEmail}"></span></li>
-			<li>Phone: <span th:utext="${orderInfo.customerPhone}"></span></li>
-			<li>Address: <span th:utext="${orderInfo.customerAddress}"></span></li>
-		</ul>
+		<h4 class="menu-directory">Customer Information:</h4>
+		<div class="table-directory">
+			<ul class="list-group">
+				<li class="list-group-item">Name: <span th:utext="${orderInfo.customerName}"></span></li>
+				<li class="list-group-item">Email: <span th:utext="${orderInfo.customerEmail}"></span></li>
+				<li class="list-group-item">Phone: <span th:utext="${orderInfo.customerPhone}"></span></li>
+				<li class="list-group-item">Address: <span th:utext="${orderInfo.customerAddress}"></span></li>
+			</ul>
+		</div>
+
 		
-		<h3>Order Summary</h3>
-		<ul>
-			<li>Total:
-				<span th:utext="${#numbers.formatDecimal(orderInfo.amount,2,2,'COMMA')}"></span>
-			</li>
-		</ul>
+		<h4 style="margin-top: 15px;" class="menu-directory">Order Summary</h4>
+		<div class="table-directory">
+			<ul class="list-group">
+				<li class="list-group-item">Total:
+					<span th:utext="${#numbers.formatDecimal(orderInfo.amount,2,2,'COMMA')}"></span>
+				</li>
+			</ul>
+		</div>
+
 	</div>
 	<br>
-	<table border="1" style="width:100%">
-		<tr>
-			<th>Product Code</th>
-			<th>Product Name</th>
-			<th>Quantity</th>
-			<th>Price</th>
-			<th>Amount</th>
-		</tr>
-		<tr th:each="orderDetailLine : ${details}">
-			<td th:utext="${orderDetailLine.getProduct().code}"></td>
-			<td th:utext="${orderDetailLine.getProduct().name}"></td>
-			<td th:utext="${orderDetailLine.getQuanity()}"></td>
-			<td th:utext="${#numbers.formatDecimal(orderDetailLine.price,2,2,'COMMA')}"></td>
-			<td th:utext="${#numbers.formatDecimal(orderDetailLine.amount,2,2,'COMMA')}"></td>
-		</tr>
-	</table>
+	<div class="table-directory">
+		<table border="1" class="table" style="margin-top: 15px">
+			<tr>
+				<th>Product Code</th>
+				<th>Product Name</th>
+				<th>Quantity</th>
+				<th>Price</th>
+				<th>Amount</th>
+			</tr>
+			<tr th:each="orderDetailLine : ${details}">
+				<td th:utext="${orderDetailLine.getProduct().code}"></td>
+				<td th:utext="${orderDetailLine.getProduct().name}"></td>
+				<td th:utext="${orderDetailLine.getQuanity()}"></td>
+				<td th:utext="${#numbers.formatDecimal(orderDetailLine.price,2,2,'COMMA') + ' $'}"></td>
+				<td th:utext="${#numbers.formatDecimal(orderDetailLine.amount,2,2,'COMMA') + ' $'}"></td>
+			</tr>
+		</table>
+	</div>
+
+	<th:block th:include="/shop/_footer"></th:block>
 
 </body>
 
