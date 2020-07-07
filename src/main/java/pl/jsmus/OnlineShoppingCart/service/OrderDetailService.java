@@ -12,6 +12,7 @@ public interface OrderDetailService {
 	public OrderDetail findById(String theId);
 	
 	public void save(OrderDetail theOrderDetail);
-	
-	public void deleteById(String theId);
+
+	void deleteByOrder_id(String orderId);
+
 }

@@ -51,7 +51,7 @@
 								Buy
 							</a>
 							<th:block sec:authorize="hasRole('ROLE_ADMIN')">
-								<a th:href="@{/shop/buyProduct(productCode=${tempProduct.code})}"
+								<a th:href="@{/shop/deleteProduct(productCode=${tempProduct.code})}"
 								   class="btn btn-danger">Delete</a>
 							</th:block>
 					</td>

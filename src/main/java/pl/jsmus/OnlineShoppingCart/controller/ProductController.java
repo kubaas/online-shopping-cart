@@ -103,6 +103,20 @@ public class ProductController {
 		
 		return "/shop/order";
 	}
+
+	@GetMapping("/orderDelete")
+	public String orderDelete(Model theModel, @RequestParam("orderId") String orderId) {
+		Order order = null;
+
+		if (orderId == null) {
+			return "redirect:/shop/orderList";
+		}
+
+		orderDetailService.deleteByOrder_id(orderId);
+		orderService.deleteById(orderId);
+
+		return "redirect:/shop/orderList";
+	}
 	
 	
 	@RequestMapping("/buyProduct")
@@ -118,11 +132,29 @@ public class ProductController {
 			CartInfo cartInfo = Utils.getCartInSession(request);
 			
 			ProductInfo productInfo = new ProductInfo(theProduct);
-			
+
+			System.out.println(productInfo);
+			System.out.println("gagagas");
+
 			cartInfo.addProduct(productInfo, 1);
 		}
 		
 		return "redirect:/shop/cart";
+	}
+
+	@RequestMapping("/deleteProduct")
+	public String deleteProduct(HttpServletRequest request,
+							 @RequestParam("productCode") String theCode) {
+
+		Product theProduct = null;
+		if(theCode != null && theCode.length() > 0) {
+			theProduct = productService.findById(theCode);
+			if(theProduct != null) {
+				productService.deleteById(theCode);
+			}
+		}
+
+		return "redirect:/shop/list";
 	}
 	
 	//POST: Update quantity for product in cart

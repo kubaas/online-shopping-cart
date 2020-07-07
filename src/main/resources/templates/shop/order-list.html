@@ -47,7 +47,7 @@
 				<td><a th:href="@{|/shop/order?orderId=${orderInfo.id}|}"
 					   class="btn btn-primary">View</a>
 					<th:block sec:authorize="hasRole('ROLE_ADMIN')">
-						<a th:href="@{|/shop/order?orderId=${orderInfo.id}|}"
+						<a th:href="@{|/shop/orderDelete?orderId=${orderInfo.id}|}"
 						   class="btn btn-danger">Delete</a>
 					</th:block>
 				</td>

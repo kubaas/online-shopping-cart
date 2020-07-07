@@ -54,8 +54,8 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 	}
 
 	@Override
-	public void deleteById(String theId) {
-		orderDetailRepository.deleteById(theId);
-	}
+	public void deleteByOrder_id(String theId) { orderDetailRepository.deleteByOrder_id(theId);  }
+
+
 
 }
