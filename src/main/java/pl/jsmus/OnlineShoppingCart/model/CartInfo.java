@@ -9,7 +9,7 @@ public class CartInfo {
 	
 	private CustomerInfo customerInfo;
 	
-	private final List<CartLineInfo> cartLines = new ArrayList<CartLineInfo>();
+	private List<CartLineInfo> cartLines = new ArrayList<CartLineInfo>();
 	
 	public CartInfo() {
 		
@@ -61,22 +61,14 @@ public class CartInfo {
 		else {
 			line.setQuantity(newQuantity);
 		}
+
 		
 	}
 
 	public void updateQuantity(CartInfo cartForm) {
 		if(cartForm != null) {
 			List<CartLineInfo> lines = cartForm.getCartLines();
-			System.out.println(lines);
-			System.out.println();
-			System.out.println(lines.get(0));
-			System.out.println();
-			System.out.println(lines.get(0).getQuantity());
 			for(CartLineInfo line : lines) {
-				System.out.println(line.getProductInfo().getCode());
-				System.out.println(line.getQuantity());
-				System.out.println();
-				System.out.println();
 				this.updateProduct(line.getProductInfo().getCode(), line.getQuantity());
 			}
 		}

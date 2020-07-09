@@ -133,8 +133,6 @@ public class ProductController {
 			
 			ProductInfo productInfo = new ProductInfo(theProduct);
 
-			System.out.println(productInfo);
-			System.out.println("gagagas");
 
 			cartInfo.addProduct(productInfo, 1);
 		}

@@ -41,6 +41,9 @@
 						Price: <span th:utext="${#numbers.formatDecimal(cartLineInfo.productInfo.price,2,2,'COMMA') + ' $'}"></span>
 					</li>
 					<li class="list-group-item">
+						<input type="hidden"
+							   th:name="|cartLines[${varStatus.index}].productInfo.code|"
+							   th:value="${cartLineInfo.productInfo.code}" />
 						Quantity:  <input
                             th:name="|cartLines[${varStatus.index}].quantity|"
                             th:value="${cartLineInfo.quantity}" class="form-control"/>
