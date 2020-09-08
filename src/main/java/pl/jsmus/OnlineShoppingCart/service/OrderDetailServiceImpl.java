@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
 import pl.jsmus.OnlineShoppingCart.dao.OrderDetailsRepository;
 import pl.jsmus.OnlineShoppingCart.entity.OrderDetail;
 
@@ -16,6 +17,7 @@ import pl.jsmus.OnlineShoppingCart.entity.OrderDetail;
  */
 
 @Service
+@Transactional
 public class OrderDetailServiceImpl implements OrderDetailService {
 
 	OrderDetailsRepository orderDetailRepository;
@@ -32,20 +34,9 @@ public class OrderDetailServiceImpl implements OrderDetailService {
 
 	@Override
 	public OrderDetail findById(String theId) {
+
+		return orderDetailRepository.findById(theId).orElseThrow(() -> new RuntimeException("Did not find order detail id - " + theId));
 		
-		Optional<OrderDetail> result = orderDetailRepository.findById(theId);
-		
-		OrderDetail theOrderDetail = null;
-		
-		if(result.isPresent()) {
-			theOrderDetail = result.get();
-		}
-		else {
-			throw new RuntimeException("Did not find order detail id - " + theId);
-		}
-		
-		
-		return theOrderDetail;
 	}
 
 	@Override
